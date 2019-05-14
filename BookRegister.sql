@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Admins` (
-  `Adminid` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `Förnamn` varchar(50) NOT NULL,
   `Efternamn` varchar(50) NOT NULL,
   `Password` varchar(150) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE `Admins` (
 -- Dumping data for table `Admins`
 --
 
-INSERT INTO `Admins` (`Adminid`, `Förnamn`, `Efternamn`, `Password`, `APIKey`) VALUES
+INSERT INTO `Admins` (`id`, `Förnamn`, `Efternamn`, `Password`, `APIKey`) VALUES
 (1, 'Axel', 'Placeholder', 'qwerty', 'qwertyuiop'),
 (2, 'Toma', 'Placeholder', 'qwerty', 'qwertyuiop'),
 (3, 'Eric', 'Beaussant', 'qwerty', 'qwertyuiop'),
@@ -51,7 +51,7 @@ INSERT INTO `Admins` (`Adminid`, `Förnamn`, `Efternamn`, `Password`, `APIKey`) 
 --
 
 CREATE TABLE `AuthorBooks` (
-  `ABid` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `Autid` int(11) NOT NULL,
   `Bokid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -60,7 +60,7 @@ CREATE TABLE `AuthorBooks` (
 -- Dumping data for table `AuthorBooks`
 --
 
-INSERT INTO `AuthorBooks` (`ABid`, `Autid`, `Bokid`) VALUES
+INSERT INTO `AuthorBooks` (`id`, `Autid`, `Bokid`) VALUES
 (1, 1, 1),
 (2, 2, 2),
 (3, 2, 3),
@@ -96,7 +96,7 @@ INSERT INTO `Authors` (`id`, `Förnamn`, `Efternamn`) VALUES
 --
 
 CREATE TABLE `Books` (
-  `Bookid` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `Namn` varchar(70) NOT NULL,
   `Beskrivning` varchar(150) DEFAULT NULL,
   `Sidantal` int(4) DEFAULT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE `Books` (
 -- Dumping data for table `Books`
 --
 
-INSERT INTO `Books` (`Bookid`, `Namn`, `Beskrivning`, `Sidantal`, `Pubid`, `Catid`) VALUES
+INSERT INTO `Books` (`id`, `Namn`, `Beskrivning`, `Sidantal`, `Pubid`, `Catid`) VALUES
 (1, 'Pipi Långstrump', 'xrdctfyvgbuhinjomkp,lå.wxrydctufvygbhnjmwrxydctfglbhöunzgbfdöf vhjvcnmbjknergbknjbfdmfrv vfdnb nb fdvjhvfjh ', 230, 1, 1),
 (2, 'Lord of the Rings', 'zrxetcryvtubyiunoimo pojlihkugjyhgcfxdzs', 666, 2, 2),
 (3, 'Bilbo the hobbit', 'zrxetcryvtubyiunoimo pojlihkugjyhgcfxdzs', 666, 2, 2),
@@ -122,7 +122,7 @@ INSERT INTO `Books` (`Bookid`, `Namn`, `Beskrivning`, `Sidantal`, `Pubid`, `Cati
 --
 
 CREATE TABLE `Categori` (
-  `Catid` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `Namn` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -130,7 +130,7 @@ CREATE TABLE `Categori` (
 -- Dumping data for table `Categori`
 --
 
-INSERT INTO `Categori` (`Catid`, `Namn`) VALUES
+INSERT INTO `Categori` (`id`, `Namn`) VALUES
 (1, 'Barn'),
 (2, 'Äventyr'),
 (3, 'Historisk Fiktion'),
@@ -144,7 +144,7 @@ INSERT INTO `Categori` (`Catid`, `Namn`) VALUES
 --
 
 CREATE TABLE `Publisher` (
-  `Pubid` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `Namn` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -152,7 +152,7 @@ CREATE TABLE `Publisher` (
 -- Dumping data for table `Publisher`
 --
 
-INSERT INTO `Publisher` (`Pubid`, `Namn`) VALUES
+INSERT INTO `Publisher` (`id`, `Namn`) VALUES
 (1, 'Bonniers'),
 (2, 'Tryckeriet'),
 (3, 'Galimard'),
@@ -166,13 +166,13 @@ INSERT INTO `Publisher` (`Pubid`, `Namn`) VALUES
 -- Indexes for table `Admins`
 --
 ALTER TABLE `Admins`
-  ADD PRIMARY KEY (`Adminid`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `AuthorBooks`
 --
 ALTER TABLE `AuthorBooks`
-  ADD PRIMARY KEY (`ABid`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `Authors`
@@ -185,19 +185,19 @@ ALTER TABLE `Authors`
 -- Indexes for table `Books`
 --
 ALTER TABLE `Books`
-  ADD PRIMARY KEY (`Bookid`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `Categori`
 --
 ALTER TABLE `Categori`
-  ADD PRIMARY KEY (`Catid`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `Publisher`
 --
 ALTER TABLE `Publisher`
-  ADD PRIMARY KEY (`Pubid`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -207,12 +207,12 @@ ALTER TABLE `Publisher`
 -- AUTO_INCREMENT for table `Admins`
 --
 ALTER TABLE `Admins`
-  MODIFY `Adminid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `AuthorBooks`
 --
 ALTER TABLE `AuthorBooks`
-  MODIFY `ABid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `Authors`
 --
@@ -222,17 +222,17 @@ ALTER TABLE `Authors`
 -- AUTO_INCREMENT for table `Books`
 --
 ALTER TABLE `Books`
-  MODIFY `Bookid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `Categori`
 --
 ALTER TABLE `Categori`
-  MODIFY `Catid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `Publisher`
 --
 ALTER TABLE `Publisher`
-  MODIFY `Pubid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
