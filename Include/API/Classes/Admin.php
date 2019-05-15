@@ -1,20 +1,23 @@
 
 <?php
 require_once 'CRUD.php';
-class Admin 
+class Admin
 {
     public $db;
     public $is_logged_in = false;
     public $table = 'Admins';
     public $fields = null;
 
-    function __construct() 
-    {    
+    function __construct()
+    {
+        // Kopplar upp mot databasen
         $obj = new DB();
         $this->db = $obj->pdo;
-        $this->fields = array_column($this->getFields(), 'Field');    
+        // Hämtar kolumnnamnen && dess typ
+        $this->fields = array_column($this->getFields(), 'Field');
     }
 
+    // Hämtar och returnerar alla kollumner och filtrerar bort känslig data
     public function getFields()
     {
         $fields = $this->db->query("SHOW COLUMNS FROM $this->table;")->fetchAll();
@@ -27,21 +30,21 @@ class Admin
         return $filtered_fields;
     }
 
-    public function createInputs() 
+    public function createInputs()
     {
         $columns = array();
-        foreach($this->fields as $field) 
+        foreach($this->fields as $field)
         {
             if($field !== 'id' && $field !== 'APIKey') {
                 $columns [] = $field;
                 if($field === 'Password') {
-                    echo "<div class=''><input type='password' placeholder='$field' name='$field'></div>";   
+                    echo "<div class=''><input type='password' placeholder='$field' name='$field'></div>";
                 }
                 elseif($field === 'email') {
-                    echo "<div class=''><input type='email' placeholder='$field' name='$field'></div>";   
+                    echo "<div class=''><input type='email' placeholder='$field' name='$field'></div>";
                 }
                  else {
-                    echo "<div class=''><input type='text' placeholder='$field' name='$field'></div>";   
+                    echo "<div class=''><input type='text' placeholder='$field' name='$field'></div>";
                 }
             }
         }
@@ -85,21 +88,21 @@ class Admin
         }
         // Execute query and return result.
         return $statement->execute();
-    }   
+    }
 
-    public function checkExist($value) 
+    public function checkExist($value)
     {
         return $this->db->query("SELECT * FROM $this->table WHERE username = '$value';")->fetchAll();
     }
 
-    public function login() 
+    public function login()
     {
         $user = filter_input(INPUT_POST, 'Username', FILTER_SANITIZE_MAGIC_QUOTES);
         $pass = filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_MAGIC_QUOTES);
-        $sql = "SELECT password, id 
-                FROM $this->table 
+        $sql = "SELECT password, id
+                FROM $this->table
                 WHERE username = ?";
-                
+
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(1, $user);
         $stmt->execute();
@@ -113,7 +116,7 @@ class Admin
             $_SESSION['user'] = "$user";
             $_SESSION['user_id'] = $customerId;
         }
-        return $this->is_logged_in; 
+        return $this->is_logged_in;
     }
 
     public function api_key_generator() {
@@ -134,4 +137,3 @@ class Admin
         return $this->db->query("SELECT APIKey FROM $this->table WHERE id = $user_id;")->fetchColumn();
     }
 }
-
