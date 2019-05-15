@@ -1,0 +1,482 @@
+{
+	"info": {
+		"_postman_id": "c03c9baf-ce67-4fc1-ae5e-2d3d6236c6e3",
+		"name": "Grupp 8 API (Eric, Hatem, Axel)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET ONE Publisher",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "5cdc300ef3fe3",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "apikey",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher&id=1",
+					"protocol": "http",
+					"host": [
+						"apiprojekt",
+						"mistert",
+						"se"
+					],
+					"path": [
+						"APIcourse",
+						"Pages",
+						"query_response.php"
+					],
+					"query": [
+						{
+							"key": "table",
+							"value": "Publisher"
+						},
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Med denna kan vi hämta en. Tabeller vi kan hämta från:\n- Authors,\n- Books,\n- Category,\n- Publisher"
+			},
+			"response": []
+		},
+		{
+			"name": "GET ONE Category",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "5cdc300ef3fe3",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "apikey",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher&id=1",
+					"protocol": "http",
+					"host": [
+						"apiprojekt",
+						"mistert",
+						"se"
+					],
+					"path": [
+						"APIcourse",
+						"Pages",
+						"query_response.php"
+					],
+					"query": [
+						{
+							"key": "table",
+							"value": "Publisher"
+						},
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Med denna kan vi hämta en. Tabeller vi kan hämta från:\n- Authors,\n- Books,\n- Category,\n- Publisher"
+			},
+			"response": []
+		},
+		{
+			"name": "GET ONE Books",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "5cdc300ef3fe3",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "apikey",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher&id=1",
+					"protocol": "http",
+					"host": [
+						"apiprojekt",
+						"mistert",
+						"se"
+					],
+					"path": [
+						"APIcourse",
+						"Pages",
+						"query_response.php"
+					],
+					"query": [
+						{
+							"key": "table",
+							"value": "Publisher"
+						},
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Med denna kan vi hämta en. Tabeller vi kan hämta från:\n- Authors,\n- Books,\n- Category,\n- Publisher"
+			},
+			"response": []
+		},
+		{
+			"name": "GET ONE Authors",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "5cdc300ef3fe3",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "apikey",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher&id=1",
+					"protocol": "http",
+					"host": [
+						"apiprojekt",
+						"mistert",
+						"se"
+					],
+					"path": [
+						"APIcourse",
+						"Pages",
+						"query_response.php"
+					],
+					"query": [
+						{
+							"key": "table",
+							"value": "Publisher"
+						},
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Med denna kan vi hämta en. Tabeller vi kan hämta från:\n- Authors,\n- Books,\n- Category,\n- Publisher"
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "5cdc300ef3fe3",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "apikey",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher",
+					"protocol": "http",
+					"host": [
+						"apiprojekt",
+						"mistert",
+						"se"
+					],
+					"path": [
+						"APIcourse",
+						"Pages",
+						"query_response.php"
+					],
+					"query": [
+						{
+							"key": "table",
+							"value": "Publisher"
+						}
+					]
+				},
+				"description": "Med denna hämtar vi alla. Tabeller vi kan hämta från:\n- Authors,\n- Books,\n- Category,\n- Publisher\n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "POST",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "5cdc300ef3fe3",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "apikey",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Namn\": \"Mr. T Third Edition\",\n    \"Beskrivning\": \"Handlar om en kill som gillar bägare.\",\n    \"Sidantal\": 2553,\n    \"Pubid\": 2,\n    \"Catid\": 1\n}"
+				},
+				"url": {
+					"raw": "http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Books",
+					"protocol": "http",
+					"host": [
+						"apiprojekt",
+						"mistert",
+						"se"
+					],
+					"path": [
+						"APIcourse",
+						"Pages",
+						"query_response.php"
+					],
+					"query": [
+						{
+							"key": "table",
+							"value": "Books"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "5cdc300ef3fe3",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "apikey",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : 8,\n    \"Namn\": \"Felixs Bägare\",\n    \"Beskrivning\": \"Bytte ju igen, o igen!\",\n    \"Sidantal\": 255,\n    \"Pubid\": 1,\n    \"Catid\": 3\n}"
+				},
+				"url": {
+					"raw": "http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Books",
+					"protocol": "http",
+					"host": [
+						"apiprojekt",
+						"mistert",
+						"se"
+					],
+					"path": [
+						"APIcourse",
+						"Pages",
+						"query_response.php"
+					],
+					"query": [
+						{
+							"key": "table",
+							"value": "Books"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "5cdc300ef3fe3",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "apikey",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : 0\n}"
+				},
+				"url": {
+					"raw": "http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Books",
+					"protocol": "http",
+					"host": [
+						"apiprojekt",
+						"mistert",
+						"se"
+					],
+					"path": [
+						"APIcourse",
+						"Pages",
+						"query_response.php"
+					],
+					"query": [
+						{
+							"key": "table",
+							"value": "Books"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9baaa0a3-d9ee-4805-a16e-83227d53dd76",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f80aeb00-3535-4c51-88b3-639a04940381",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
