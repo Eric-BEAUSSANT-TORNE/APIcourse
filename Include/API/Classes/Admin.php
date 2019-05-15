@@ -37,23 +37,22 @@ class Admin
         $columns = array();
         foreach($this->fields as $field)
         {
-            if($field !== 'id' && $field !== 'APIKey') {
-                $columns [] = $field;
-                if($field === 'Password') {
-                    echo "<div class=''><input type='password' placeholder='$field' name='$field'></div>";
-                }
-                elseif($field === 'email') {
-                    echo "<div class=''><input type='email' placeholder='$field' name='$field'></div>";
-                }
-                 else {
-                    echo "<div class=''><input type='text' placeholder='$field' name='$field'></div>";
-                }
+            $columns [] = $field;
+            if($field === 'Password') {
+                echo "<div class=''><input type='password' placeholder='$field' name='$field'></div>";
             }
+            elseif($field === 'email') {
+                echo "<div class=''><input type='email' placeholder='$field' name='$field'></div>";
+            }
+                else {
+                echo "<div class=''><input type='text' placeholder='$field' name='$field'></div>";
+            }
+        
         }
         return $columns;
     }
 
-    // 
+    // Här skapar vi data till tabellen. 
     public function create($data = null)
     {
         // Setup query.
@@ -66,6 +65,7 @@ class Admin
             if($field !== 'APIKey') {
                 if($field === 'Password') {
                     $pass = filter_input(INPUT_POST, $field, FILTER_SANITIZE_STRING);
+                    // Ser till så att lösenord innehåller minst 4 tecken. 
                     if(strlen($pass) > 3) {
                         $hash = password_hash($pass, PASSWORD_DEFAULT);
                         $statement->bindValue($field, $hash, PDO::PARAM_STR);
@@ -93,12 +93,13 @@ class Admin
         return $statement->execute();
     }
 
-    // 
-    public function checkExist($value) 
+    // ser om användarnamnet redan finns.
+    protected function checkExist($username) 
     {
-        return $this->db->query("SELECT * FROM $this->table WHERE username = '$value';")->fetchAll();
+        return $this->db->query("SELECT * FROM $this->table WHERE username = '$username';")->fetchAll();
     }
 
+    // Anropas när användaren vill logga in. 
     public function login()
     {
         $user = filter_input(INPUT_POST, 'Username', FILTER_SANITIZE_MAGIC_QUOTES);
@@ -115,6 +116,7 @@ class Admin
         $customerId = $result[1];
         $this->is_logged_in = password_verify($pass, $hash);
 
+        // Lagrar användarens ID, användarnamn, och att den är inloggad.
         if($this->is_logged_in) {
             $_SESSION['logged_in'] = true;
             $_SESSION['user'] = "$user";
@@ -133,10 +135,10 @@ class Admin
         } else {
             echo "Try again m8";
         }
-
     }
 
-    public function getKey() {
+    public function getKey() 
+    {
         $user_id = $_SESSION['user_id'];
         return $this->db->query("SELECT APIKey FROM $this->table WHERE id = $user_id;")->fetchColumn();
     }

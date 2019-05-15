@@ -1,5 +1,9 @@
 <?php
 session_start();
+// Om användaren inte är inloggad, så skickas den till startsidan.
+if(!$_SESSION['logged_in']) {
+    header('Location: index.php');
+}
 require_once '../Include/API/Classes/Admin.php';
 $admin = new Admin;
 

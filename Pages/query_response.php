@@ -22,7 +22,9 @@ spl_autoload_register(function ($class_name) {
         http_response_code(501);
     }
 });
+// Vilken klass/tabell vi ska justera.
 $class = $request_parts[0];
+// Används endast för GET, och är då vilket ID det gäller. 
 $args = $request_parts[1] ?? null;
 $body_data = json_decode(file_get_contents('php://input'));
 $response = [
