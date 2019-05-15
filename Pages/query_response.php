@@ -23,9 +23,9 @@ spl_autoload_register(function ($class_name) {
     }
 });
 // Vilken klass/tabell vi ska justera.
-$class = $_GET['table'];
+$class = filter_input(INPUT_GET, 'table', FILTER_SANITIZE_STRING);
 // Används endast för GET, och är då vilket ID det gäller. 
-$args = $_GET['id'] ?? null;
+$args = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT) ?? NULL;
 $body_data = json_decode(file_get_contents('php://input'));
 $response = [
     'info' => null,
