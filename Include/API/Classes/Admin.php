@@ -1,6 +1,6 @@
 
 <?php
-require_once 'CRUD.php';
+require_once 'DB.php';
 class Admin
 {
     public $db;
@@ -8,15 +8,15 @@ class Admin
     public $table = 'Admins';
     public $fields = null;
 
-    // Kopplar upp mot DB och hämtar angiven tabells kolumnnamn. 
-    function __construct() 
-    {    
+    // Kopplar upp mot DB och hämtar angiven tabells kolumnnamn.
+    function __construct()
+    {
         $obj = new DB();
         $this->db = $obj->pdo;
         $this->fields = array_column($this->getFields(), 'Field');
     }
 
-    // Här returnerar vi kolumnnamnen och metainformation om de, men filtrerar 
+    // Här returnerar vi kolumnnamnen och metainformation om de, men filtrerar
     // bort kolumner som innehåller känslig data.
     public function getFields()
     {
@@ -31,8 +31,8 @@ class Admin
     }
 
 
-    // Här skapar vi inputs för log-in sidan. Känns lite onödigt i efterhand.. :) 
-    public function createInputs() 
+    // Här skapar vi inputs för log-in sidan. Känns lite onödigt i efterhand.. :)
+    public function createInputs()
     {
         $columns = array();
         foreach($this->fields as $field)
@@ -47,12 +47,12 @@ class Admin
                 else {
                 echo "<div class=''><input type='text' placeholder='$field' name='$field'></div>";
             }
-        
+
         }
         return $columns;
     }
 
-    // Här skapar vi data till tabellen. 
+    // Här skapar vi data till tabellen.
     public function create($data = null)
     {
         // Setup query.
@@ -65,7 +65,7 @@ class Admin
             if($field !== 'APIKey') {
                 if($field === 'Password') {
                     $pass = filter_input(INPUT_POST, $field, FILTER_SANITIZE_STRING);
-                    // Ser till så att lösenord innehåller minst 4 tecken. 
+                    // Ser till så att lösenord innehåller minst 4 tecken.
                     if(strlen($pass) > 3) {
                         $hash = password_hash($pass, PASSWORD_DEFAULT);
                         $statement->bindValue($field, $hash, PDO::PARAM_STR);
@@ -94,12 +94,12 @@ class Admin
     }
 
     // ser om användarnamnet redan finns.
-    protected function checkExist($username) 
+    protected function checkExist($username)
     {
         return $this->db->query("SELECT * FROM $this->table WHERE username = '$username';")->fetchAll();
     }
 
-    // Anropas när användaren vill logga in. 
+    // Anropas när användaren vill logga in.
     public function login()
     {
         $user = filter_input(INPUT_POST, 'Username', FILTER_SANITIZE_MAGIC_QUOTES);
@@ -137,7 +137,7 @@ class Admin
         }
     }
 
-    public function getKey() 
+    public function getKey()
     {
         $user_id = $_SESSION['user_id'];
         return $this->db->query("SELECT APIKey FROM $this->table WHERE id = $user_id;")->fetchColumn();
