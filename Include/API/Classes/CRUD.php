@@ -53,7 +53,7 @@ class CRUD
             $statement = $this->db->prepare($sql);
             $statement->execute($parameters);
             // Return all posts.
-            return $statement->fetchAll();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 
@@ -125,23 +125,24 @@ class CRUD
     {
         $valid_user = false;
         if (isset($_GET['apikey'])) {
+            if($_GET['apikey'] === '') {
+                return false;   
+            }
             // Check if apikey is valid.
             $apikey = filter_input(INPUT_GET, 'apikey', FILTER_SANITIZE_STRING);
-            var_dump($apikey);
             $sql = 'SELECT * FROM Admins WHERE APIKey = :apikey';
             $statement = $this->db->prepare($sql);
             $statement->bindValue('apikey', $apikey, PDO::PARAM_STR);
-            $data = $statement->execute();
-
-            var_dump($data);
-            if ($data) {
+            $statement->execute();
+            $result = $statement->fetchAll();
+            if ($result) {
                 // Apikey is valid.
                 $valid_user = true;
                 $_SESSION['apikey'] = $apikey;
                 return true;
             }
         }
-        if (!$valid_user) {
+        if ($valid_user == false) {
             http_response_code(401);
             return false;
         }
