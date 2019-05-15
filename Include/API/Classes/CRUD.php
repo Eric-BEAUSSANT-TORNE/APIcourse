@@ -66,7 +66,6 @@ class CRUD
     public function update($data)
     {
         if($this->check_valid_api()) {
-            // Oklart vad detta gör
             $id = null;
             if (isset($data->{'id'})) {
                 $id = $data->{'id'};
@@ -98,7 +97,6 @@ class CRUD
     public function remove($data)
     {
       if($this->check_valid_api()) {
-          // Oklart vad detta gör
           $id = null;
           if (isset($data->{'id'})) {
               $id = $data->{'id'};
@@ -107,12 +105,12 @@ class CRUD
           }
           // Setup query.
           $arr_fields = [];
-          $sql = "DELETE $this->table WHERE id = :table_id";
-          }
+          $sql = "DELETE FROM $this->table WHERE id = :table_id";
+
           // Prepare query.
           $statement = $this->db->prepare($sql);
           // Bind values.
-          $statement->bindValue('table_id', $id, PDO::PARAM_STR);
+          $statement->bindValue('table_id', $id, PDO::PARAM_INT);
           // Execute query and return result.
           return $statement->execute();
       } else {
