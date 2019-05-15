@@ -53,7 +53,15 @@ INSERT INTO `Admins` (`id`, `Förnamn`, `Efternamn`, `Password`, `APIKey`) VALUE
 CREATE TABLE `AuthorBooks` (
   `id` int(11) NOT NULL,
   `Autid` int(11) NOT NULL,
-  `Bokid` int(11) NOT NULL
+  `Bokid` int(11) NOT NULL,
+  FOREIGN KEY (Autid)
+  REFERENCES Authors(id)
+  ON UPDATE CASCADE
+  ON DELETE CASCADE,
+  FOREIGN KEY (Bokid)
+  REFERENCES Books(id)
+  ON UPDATE CASCADE
+  ON DELETE CASCADE,
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -101,7 +109,15 @@ CREATE TABLE `Books` (
   `Beskrivning` varchar(150) DEFAULT NULL,
   `Sidantal` int(4) DEFAULT NULL,
   `Pubid` int(100) NOT NULL,
-  `Catid` int(100) NOT NULL
+  `Catid` int(100) NOT NULL,
+  FOREIGN KEY (Pubid)
+  REFERENCES Publisher(id)
+  ON UPDATE CASCADE
+  ON DELETE CASCADE,
+  FOREIGN KEY (Catid)
+  REFERENCES Categori(id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -179,7 +195,6 @@ ALTER TABLE `AuthorBooks`
 --
 ALTER TABLE `Authors`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Indexes for table `Books`
