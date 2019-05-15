@@ -5,12 +5,14 @@ class CRUD
     protected $db;
     protected $table;
     protected $fields;
+
     public function __construct()
     {
         $obj = new DB();
         $this->db = $obj->pdo;
         $this->fields = array_column($this->getFields(), 'Field');
     }
+
     public function create($data)
     {
         if($this->check_valid_api()) {
@@ -36,6 +38,7 @@ class CRUD
             return $statement->execute();
         }
     }
+
     public function get($id = null)
     {
         if($this->check_valid_api()) {
@@ -53,15 +56,16 @@ class CRUD
             return $statement->fetchAll();
         }
     }
+
     public function getFields()
-    { 
+    {
         $fields = $this->db->query("SHOW COLUMNS FROM $this->table;")->fetchAll();
         return array_splice($fields, 1);
     }
+
     public function update($data)
     {
         if($this->check_valid_api()) {
-            // Oklart vad detta gör
             $id = null;
             if (isset($data->{'id'})) {
                 $id = $data->{'id'};
@@ -89,8 +93,34 @@ class CRUD
             return false;
         }
     }
-    public function check_valid_api() 
-    {    
+
+    public function remove($data)
+    {
+      if($this->check_valid_api()) {
+          $id = null;
+          if (isset($data->{'id'})) {
+              $id = $data->{'id'};
+          } else {
+              return false;
+          }
+          // Setup query.
+          $arr_fields = [];
+          $sql = "DELETE FROM $this->table WHERE id = :table_id";
+
+          // Prepare query.
+          $statement = $this->db->prepare($sql);
+          // Bind values.
+          $statement->bindValue('table_id', $id, PDO::PARAM_INT);
+          // Execute query and return result.
+          return $statement->execute();
+      } else {
+          echo "API-KEY NOT VALID";
+          return false;
+      }
+    }
+
+    public function check_valid_api()
+    {
         $valid_user = false;
         if (isset($_GET['apikey'])) {
             // Check if apikey is valid.

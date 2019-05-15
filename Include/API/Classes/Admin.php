@@ -1,7 +1,7 @@
 
 <?php
 require_once 'CRUD.php';
-class Admin 
+class Admin
 {
     public $db;
     public $is_logged_in = false;
@@ -13,7 +13,7 @@ class Admin
     {    
         $obj = new DB();
         $this->db = $obj->pdo;
-        $this->fields = array_column($this->getFields(), 'Field');    
+        $this->fields = array_column($this->getFields(), 'Field');
     }
 
     // Här returnerar vi kolumnnamnen och metainformation om de, men filtrerar 
@@ -35,18 +35,18 @@ class Admin
     public function createInputs() 
     {
         $columns = array();
-        foreach($this->fields as $field) 
+        foreach($this->fields as $field)
         {
             if($field !== 'id' && $field !== 'APIKey') {
                 $columns [] = $field;
                 if($field === 'Password') {
-                    echo "<div class=''><input type='password' placeholder='$field' name='$field'></div>";   
+                    echo "<div class=''><input type='password' placeholder='$field' name='$field'></div>";
                 }
                 elseif($field === 'email') {
-                    echo "<div class=''><input type='email' placeholder='$field' name='$field'></div>";   
+                    echo "<div class=''><input type='email' placeholder='$field' name='$field'></div>";
                 }
                  else {
-                    echo "<div class=''><input type='text' placeholder='$field' name='$field'></div>";   
+                    echo "<div class=''><input type='text' placeholder='$field' name='$field'></div>";
                 }
             }
         }
@@ -91,7 +91,7 @@ class Admin
         }
         // Execute query and return result.
         return $statement->execute();
-    }   
+    }
 
     // 
     public function checkExist($value) 
@@ -99,14 +99,14 @@ class Admin
         return $this->db->query("SELECT * FROM $this->table WHERE username = '$value';")->fetchAll();
     }
 
-    public function login() 
+    public function login()
     {
         $user = filter_input(INPUT_POST, 'Username', FILTER_SANITIZE_MAGIC_QUOTES);
         $pass = filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_MAGIC_QUOTES);
-        $sql = "SELECT password, id 
-                FROM $this->table 
+        $sql = "SELECT password, id
+                FROM $this->table
                 WHERE username = ?";
-                
+
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(1, $user);
         $stmt->execute();
@@ -120,7 +120,7 @@ class Admin
             $_SESSION['user'] = "$user";
             $_SESSION['user_id'] = $customerId;
         }
-        return $this->is_logged_in; 
+        return $this->is_logged_in;
     }
 
     public function api_key_generator() {
@@ -141,4 +141,3 @@ class Admin
         return $this->db->query("SELECT APIKey FROM $this->table WHERE id = $user_id;")->fetchColumn();
     }
 }
-
