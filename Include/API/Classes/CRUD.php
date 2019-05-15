@@ -112,7 +112,9 @@ class CRUD
           // Bind values.
           $statement->bindValue('table_id', $id, PDO::PARAM_INT);
           // Execute query and return result.
-          return $statement->execute();
+          $statement->execute();
+          return $statement->rowCount();
+          
       } else {
           echo "API-KEY NOT VALID";
           return false;

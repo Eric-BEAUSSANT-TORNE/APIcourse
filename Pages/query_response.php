@@ -39,10 +39,11 @@ if (empty($class)) {
     switch ($request_method) {
         // Delete record.
         case 'delete':
-            if ($obj->remove($body_data)) {
+            $nr_of_rows_deleted = $obj->remove($body_data);
+            if ($nr_of_rows_deleted > 0) {
                 http_response_code(200);
                 $response['results'] = $body_data;
-                $response['info']['no'] = 1;
+                $response['info']['deleted rows'] = $nr_of_rows_deleted;
                 $response['info']['message'] = "Item Successfully deleted.";
             } else {
                 http_response_code(503);
