@@ -8,6 +8,7 @@ class Admin
     public $table = 'Admins';
     public $fields = null;
 
+    // Kopplar upp mot DB och hämtar angiven tabells kolumnnamn. 
     function __construct() 
     {    
         $obj = new DB();
@@ -15,6 +16,8 @@ class Admin
         $this->fields = array_column($this->getFields(), 'Field');    
     }
 
+    // Här returnerar vi kolumnnamnen och metainformation om de, men filtrerar 
+    // bort kolumner som innehåller känslig data.
     public function getFields()
     {
         $fields = $this->db->query("SHOW COLUMNS FROM $this->table;")->fetchAll();
@@ -27,6 +30,8 @@ class Admin
         return $filtered_fields;
     }
 
+
+    // Här skapar vi inputs för log-in sidan. Känns lite onödigt i efterhand.. :) 
     public function createInputs() 
     {
         $columns = array();
@@ -48,6 +53,7 @@ class Admin
         return $columns;
     }
 
+    // 
     public function create($data = null)
     {
         // Setup query.
@@ -87,6 +93,7 @@ class Admin
         return $statement->execute();
     }   
 
+    // 
     public function checkExist($value) 
     {
         return $this->db->query("SELECT * FROM $this->table WHERE username = '$value';")->fetchAll();
