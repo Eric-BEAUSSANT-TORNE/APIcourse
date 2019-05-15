@@ -39,8 +39,18 @@ if (empty($class)) {
     switch ($request_method) {
         // Delete record.
         case 'delete':
-            // Handle delete.
+            if ($obj->remove($body_data)) {
+                http_response_code(200);
+                $response['results'] = $body_data;
+                $response['info']['no'] = 1;
+                $response['info']['message'] = "Item Successfully deleted.";
+            } else {
+                http_response_code(503);
+                $response['info']['no'] = 0;
+                $response['info']['message'] = "Couldn't delete item.";
+            }
             break;
+            
         // Create record.
         case 'post':
             if ($obj->create($body_data)) {
@@ -67,9 +77,8 @@ if (empty($class)) {
                 $response['info']['message'] = "Couldn't update item.";
             }
             break;
-        
-        // Everything else: GET.
-        default:
+
+        case 'get':
             $data = $obj->get($args);
             if ($data) {
                 http_response_code(200);
