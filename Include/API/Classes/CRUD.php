@@ -108,7 +108,7 @@ class CRUD
           // Setup query.
           $arr_fields = [];
           $sql = "DELETE $this->table WHERE id = :table_id";
-          }
+          
           // Prepare query.
           $statement = $this->db->prepare($sql);
           // Bind values.
