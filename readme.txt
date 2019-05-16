@@ -49,7 +49,7 @@ Books ex:
 }
 Authors ex:
 {
-     “Förnamn” : “Eric”,
+     "Firstname" : “Eric”,
      “Efternamn” : “Sade”
 }
 Category ex:
