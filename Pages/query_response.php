@@ -81,6 +81,8 @@ if (empty($class)) {
 
         case 'get':
             $data = $obj->get($args);
+            var_dump($data);
+            
             if ($data) {
                 http_response_code(200);
                 $response['info']['no'] = count($data);

@@ -30,10 +30,6 @@
 				},
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher&id=1",
 					"protocol": "http",
@@ -87,10 +83,6 @@
 				},
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher&id=1",
 					"protocol": "http",
@@ -144,10 +136,6 @@
 				},
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher&id=1",
 					"protocol": "http",
@@ -201,10 +189,6 @@
 				},
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher&id=1",
 					"protocol": "http",
@@ -258,10 +242,6 @@
 				},
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher",
 					"protocol": "http",
