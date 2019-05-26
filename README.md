@@ -41,15 +41,21 @@ Value = din genererade api-nyckel.
 
 <h3><u>GET:</u></h3>
 <br>
-
-Hämta en rad från en tabell:
-?table=tabell&id=1<br>
-tex: <a href="http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher&id=1">
-	http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher&id=1</a><br><br>
 Hämta alla rader från en tabell:
 ?table=tabell<br>
 Ex: <a href="http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher">
 	http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher</a><br><br>
+
+Hämta en rad från Books:
+?table=Books&ISBN=9789113096605<br>
+tex: <a href="http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Books&ISBN=9789113096605">
+	http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Books&ISBN=9789113096605</a><br><br>
+
+
+Hämta en rad från resterande tabeller:
+?table=tabell&id=1<br>
+tex: <a href="http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher&id=1">
+	http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Publisher&id=1</a><br><br>
 
 
 <h3><u>POST:</u></h3>
@@ -63,6 +69,7 @@ http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Books</a><
 
 <p>Books tex:
 {
+		"ISBN": "1337",
 		"Namn": "Mr. T Third Edition",
 		"Beskrivning": "Handlar om en kill som gillar bägare.",
 		"Sidantal": 2553,
@@ -91,18 +98,25 @@ http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Books</a><
 <br>
 
 Params:
-Samma som Post.<br>
+Samma som Post, förutom på Tabellen Books. Här behöver du även skriva in ISBN på den bok du vill ändra. Ex: 
+http://apiprojekt.mistert.se/APIcourse/Pages/query_response.php?table=Books&ISBN=1337 för att ändra boken med ISBN 1337<br>
 <h4>Body</h4>
-
-<p>Samma som POST men med extra argumentet 'id' i början, till exempel:<br>
-	Books:
+Books:
+<p>Samma body som POST:<br>
 {
-		 "id" : 8,
+		 "ISBN" : 8,
 		"Namn": "Felixs Bägare",
 		"Beskrivning": "Bytte ju igen, o igen!",
 		"Sidantal": 255,
 		"Pubid": 1,
 		"Catid": 3
+}
+Övriga:
+<p>Samma som POST men med extra argumentet 'id' i början, till exempel:<br>
+	Category:
+{
+		 "id" : 1,
+		"Namn" : 'barnens'
 }</p>
 
 <br><br>
@@ -111,7 +125,11 @@ Samma som Post.<br>
 Params:
 Samma som POST, men med enbart argumentet 'id'.<br>
 <h4>Body</h4>
-<p>Books:
+<p>Category:
 	{
 		"id" : 0
+	} </p>
+<p>Books:
+	{
+		"ISBN" : "213123"
 	} </p>

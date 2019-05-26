@@ -47,8 +47,13 @@ class CRUD
             $parameters = null;
             if ($id !== null) {
                 // If caller has provided id, then let's just look for that one product.
-                $sql .= " WHERE id = :table_id ";
-                $parameters = ['table_id' => $id];
+                if($this->table !== 'Books') {
+                    $sql .= " WHERE id = :table_id ";
+                    $parameters = ['table_id' => $id];    
+                } else {
+                    $sql .= " WHERE ISBN = :table_id ";
+                    $parameters = ['table_id' => $id];    
+                }
             }
             $statement = $this->db->prepare($sql);
             $statement->execute($parameters);
@@ -60,32 +65,59 @@ class CRUD
     public function getFields()
     {
         $fields = $this->db->query("SHOW COLUMNS FROM $this->table;")->fetchAll();
-        return array_splice($fields, 1);
+        if($this->table !== 'Books') {
+            return array_splice($fields, 1);
+        } else {
+            return $fields;
+        }
     }
 
-    public function update($data)
+    public function update($data, $isbn = null)
     {
         if($this->check_valid_api()) {
+            $id_name = null;
             $id = null;
-            if (isset($data->{'id'})) {
-                $id = $data->{'id'};
+            if($this->table !== 'Books') {
+                $id_name = 'id';
+                if (isset($data->{'id'})) {
+                    $id = $data->{'id'};
+                } else {
+                    
+                    return false;
+                }
             } else {
-                return false;
+                $id_name = 'ISBN';
+                if (isset($data->{'ISBN'})) {
+                    $id = $data->{'ISBN'};
+                } else {
+                    return false;
+                }
             }
             // Setup query.
             $arr_fields = [];
             $sql = "UPDATE $this->table SET ";
             foreach ($data as $field_name => $field_value) {
-                if ($field_name != 'id') {
+                if($this->table !== 'Books') {
+                    if ($field_name != 'id') {
+                        $arr_fields[] = $field_name . " = '" . $field_value . "' ";
+                    }
+                } else {
                     $arr_fields[] = $field_name . " = '" . $field_value . "' ";
                 }
+                
             }
             $sql .= implode(', ', $arr_fields);
-            $sql .= " WHERE id = :table_id ";
+            $sql .= " WHERE $id_name = :table_id ";
+
             // Prepare query.
             $statement = $this->db->prepare($sql);
             // Bind values.
-            $statement->bindValue('table_id', $id, PDO::PARAM_STR);
+            if($this->table !== 'Books') {
+                $statement->bindValue('table_id', $id, PDO::PARAM_STR);
+
+            } else {
+                $statement->bindValue('table_id', $isbn, PDO::PARAM_STR);
+            }
             // Execute query and return result.
             return $statement->execute();
         } else {
@@ -98,14 +130,28 @@ class CRUD
     {
       if($this->check_valid_api()) {
           $id = null;
-          if (isset($data->{'id'})) {
-              $id = $data->{'id'};
+          $id_name = null;
+
+          if($this->table !== 'Books') {
+            $id_name = 'id';
+            if (isset($data->{'id'})) {
+                $id = $data->{'id'};
+            } else {
+                return false;
+            }
           } else {
-              return false;
+            $id_name = 'ISBN';
+            if (isset($data->{'ISBN'})) {
+                $id = $data->{'ISBN'};
+            } else {
+                return false;
+            }
+
           }
+         
           // Setup query.
           $arr_fields = [];
-          $sql = "DELETE FROM $this->table WHERE id = :table_id";
+          $sql = "DELETE FROM $this->table WHERE $id_name = :table_id";
 
           // Prepare query.
           $statement = $this->db->prepare($sql);

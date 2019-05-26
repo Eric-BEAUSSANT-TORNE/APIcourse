@@ -25,7 +25,11 @@ spl_autoload_register(function ($class_name) {
 // Vilken klass/tabell vi ska justera.
 $class = filter_input(INPUT_GET, 'table', FILTER_SANITIZE_STRING);
 // Används endast för GET, och är då vilket ID det gäller. 
-$args = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT) ?? NULL;
+if($class === 'Books') {
+    $args = filter_input(INPUT_GET, 'ISBN', FILTER_SANITIZE_STRING) ?? NULL;
+} else {
+    $args = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT) ?? NULL;
+}
 $body_data = json_decode(file_get_contents('php://input'));
 $response = [
     'info' => null,
@@ -67,7 +71,7 @@ if (empty($class)) {
             break;
         // Update record.
         case 'put':
-            if ($obj->update($body_data)) {
+            if ($obj->update($body_data, $args)) {
                 http_response_code(200);
                 $response['results'] = $body_data;
                 $response['info']['no'] = 1;
@@ -80,9 +84,7 @@ if (empty($class)) {
             break;
 
         case 'get':
-            $data = $obj->get($args);
-            var_dump($data);
-            
+            $data = $obj->get($args);            
             if ($data) {
                 http_response_code(200);
                 $response['info']['no'] = count($data);
